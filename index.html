@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #36D1DC, #5B86E5);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .timer {
+            font-size: 96px;
+            color: red;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            transition: transform 0.1s, text-shadow 0.1s;
+        }
+
+        .timer:hover {
+            transform: scale(1.05);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="timer" id="timer">11:00</div>
+
+    <script>
+        const timerElement = document.getElementById('timer');
+        let minutes = 11;
+        let seconds = 0;
+
+        function updateTimerDisplay() {
+            const minutesStr = minutes.toString().padStart(2, '0');
+            const secondsStr = seconds.toString().padStart(2, '0');
+            timerElement.textContent = `${minutesStr}:${secondsStr}`;
+        }
+
+        function countdown() {
+            if (seconds === 0 && minutes === 0) {
+                clearInterval(interval);
+                alert('Tempo esgotado!');
+                return;
+            }
+
+            if (seconds === 0) {
+                minutes -= 1;
+                seconds = 59;
+            } else {
+                seconds -= 1;
+            }
+
+            updateTimerDisplay();
+        }
+
+        const interval = setInterval(countdown, 1000);
+    </script>
+</body>
+
+</html>
